@@ -11,8 +11,6 @@ local split_pane = {
         hl["SnacksDashboardHeader"] = {
           fg = is_wsl and c.green or c.blue2,
         }
-        -- hl["SnacksDashboardTitle"] = { fg = c.magenta, bold = true }
-        -- hl["SnacksDashboardKey"] = { fg = c.orange, bold = true }
       end
       return opts
     end,
@@ -84,6 +82,9 @@ local split_pane = {
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
         },
+      }
+      opts.finder = {
+        command = is_wsl and "fdfind" or "fd",
       }
     end,
   },

@@ -1,6 +1,18 @@
 -- ~/.config/nvim/lua/plugins/snacks.lua
+local os = require("utils.os_utils")
+local header = require("utils.header_utils")
+
 vim.api.nvim_set_hl(0, "SnacksHeaderWSL", { fg = "#00ff00" })
-local is_wsl = vim.fn.has("wsl") == 1
+
+local header_display = header.NVIM
+local header_indent = header.NVIM_OFFSET
+if os.WSL then
+  header_display = header.WSL
+  header_indent = header.WSL_OFFSET
+elseif os.WINDOWS then
+  header_display = header.WINDOWS
+  header_indent = header.WINDOWS_OFFSET
+end
 
 local split_pane = {
   {
@@ -8,8 +20,14 @@ local split_pane = {
     opts = function(_, opts)
       opts.lualine_bold = true
       opts.on_highlights = function(hl, c)
+        local color = c.green
+        if os.WSL then
+          color = c.green
+        elseif os.WINDOWS then
+          color = c.blue2
+        end
         hl["SnacksDashboardHeader"] = {
-          fg = is_wsl and c.green or c.blue2,
+          fg = color,
         }
       end
       return opts
@@ -18,25 +36,9 @@ local split_pane = {
   {
     "folke/snacks.nvim",
     opts = function(_, opts)
-      local header_indent = is_wsl and 60 or 50
-      local header_display = is_wsl
-          and [[
-██╗    ██╗███████╗██╗     
-██║    ██║██╔════╝██║     
-██║ █╗ ██║███████╗██║     
-██║███╗██║╚════██║██║     
-╚███╔███╔╝███████║███████╗
- ╚══╝╚══╝ ╚══════╝╚══════╝]]
-        or [[
-██╗    ██╗██╗███╗   ██╗██████╗  ██████╗ ██╗    ██╗███████╗
-██║    ██║██║████╗  ██║██╔══██╗██╔═══██╗██║    ██║██╔════╝
-██║ █╗ ██║██║██╔██╗ ██║██║  ██║██║   ██║██║ █╗ ██║███████╗
-██║███╗██║██║██║╚██╗██║██║  ██║██║   ██║██║███╗██║╚════██║
-╚███╔███╔╝██║██║ ╚████║██████╔╝╚██████╔╝╚███╔███╔╝███████║
- ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚══════╝]]
       opts.dashboard = {
         sections = {
-          { section = "header", indent = header_indent, padding = 5 },
+          { section = "header", padding = 5, indent = header_indent },
           { section = "keys", gap = 1, padding = 5 },
           {
             pane = 2,
@@ -94,7 +96,7 @@ local split_pane = {
         },
       }
       opts.finder = {
-        command = is_wsl and "fdfind" or "fd",
+        command = os.WSL and "fdfind" or "fd",
       }
       opts.explorer = {
         show_hidden = true,

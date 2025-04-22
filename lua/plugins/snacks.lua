@@ -62,7 +62,7 @@ local split_pane = {
           {
             pane = 2,
             icon = " ",
-            title = "Recent Projcets",
+            title = "Recent Projects",
             key = "p",
             action = ":lua Snacks.dashboard.pick('projects')",
             indent = 2,
@@ -95,6 +95,9 @@ local split_pane = {
       }
       opts.finder = {
         command = is_wsl and "fdfind" or "fd",
+      }
+      opts.explorer = {
+        show_hidden = true,
       }
     end,
   },

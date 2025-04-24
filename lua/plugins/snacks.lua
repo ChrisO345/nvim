@@ -99,7 +99,7 @@ local split_pane = {
         command = os.WSL and "fdfind" or "fd",
       }
       opts.explorer = {
-        show_hidden = true,
+        hidden = true,
       }
     end,
   },

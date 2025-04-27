@@ -1,5 +1,3 @@
--- Settings for the noice.nvim plugin
-
 return {
   "folke/noice.nvim",
   opts = {

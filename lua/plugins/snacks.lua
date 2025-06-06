@@ -1,16 +1,29 @@
 return {
-{
+  {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
   opts = {
     animate = { enabled = false },
     bigfile = { enabled = true },
-    dashboard = { enabled = true },
+    dashboard = { enabled = false },
     explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
-    image = { enabled = true },
+    image = {
+        enabled = true,
+        math = {
+          enabled = true,
+          typst = {
+          tpl = [[
+            #set page(width: auto, height: auto, margin: (x: 2pt, y: 2pt))
+            #show math.equation.where(block: false): set text(top-edge: "bounds", bottom-edge: "bounds")
+            #set text(size: 12pt, fill: rgb("${color}"))
+            ${header}
+            ${content}]],
+          },
+        }
+      },
     picker = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
@@ -135,5 +148,5 @@ return {
       end,
     })
   end,
-}
+  }
 }

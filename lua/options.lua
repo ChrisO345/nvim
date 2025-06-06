@@ -18,8 +18,6 @@ vim.g.trouble_lualine = true
 local opt = vim.opt
 
 opt.autowrite = true
-
-
 opt.clipboard = "unnamedplus"
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2
@@ -36,7 +34,7 @@ opt.fillchars = {
 }
 opt.foldlevel = 99
 opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
-opt.formatoptions = "jcroqlnt"
+opt.formatoptions = "jcrqlnt"
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true

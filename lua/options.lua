@@ -1,24 +1,18 @@
+-- Editor settings
+
 vim.g.mapleader = " "
--- vim.g.maplocalleader = "\\"
-
 vim.g.autoformat = true
-
 vim.g.snacks_animate = false
-
 vim.g.ai_cmp = true
-
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
-
 vim.g.root_lsp_ignore = { "copilot" }
-
 vim.g.deprecation_warnings = false
-
 vim.g.trouble_lualine = true
+vim.g.markdown_recommended_style = 0
 
 local opt = vim.opt
 
 opt.autowrite = true
-
 opt.clipboard = "unnamedplus"
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2
@@ -85,5 +79,3 @@ else
   opt.foldmethod = "indent"
   opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
 end
-
-vim.g.markdown_recommended_style = 0

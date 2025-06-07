@@ -24,7 +24,13 @@ return {
           },
         }
       },
-      picker = { enabled = true },
+      picker = {
+        enabled = true,
+        layout = {
+          cycle = true,
+          preset = "telescope",
+        }
+      },
       quickfile = { enabled = true },
       scope = { enabled = true },
       scroll = { enabled = true },

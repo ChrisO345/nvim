@@ -1,3 +1,5 @@
+-- Keyboard shortcuts and command bindings
+
 local map = vim.keymap.set
 
 -- better up/down
@@ -181,7 +183,7 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Snacks Remap
-map({ "n", "v" }, "<leader><space>", function() Snacks.picker.files() end, { desc = "Find Files" })
+map({ "n", "v" }, "<leader><space>", function() Snacks.picker.files({ hidden = true }) end, { desc = "Find Files" })
 map({ "n" }, "<leader>ff", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
 
 -- Keymaps picker

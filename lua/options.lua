@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+-- vim.g.maplocalleader = "\\"
 
 vim.g.autoformat = true
 
@@ -18,6 +18,7 @@ vim.g.trouble_lualine = true
 local opt = vim.opt
 
 opt.autowrite = true
+
 opt.clipboard = "unnamedplus"
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2
@@ -66,7 +67,7 @@ opt.splitright = true
 opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 opt.tabstop = 2
 opt.termguicolors = true
-opt.timeoutlen = vim.g.vscode and 1000 or 300
+opt.timeoutlen = 500
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200

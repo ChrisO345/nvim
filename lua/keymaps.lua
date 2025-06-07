@@ -86,15 +86,7 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- New File
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
--- location list
-map("n", "<leader>xl", function()
-  local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
-  if not success and err then
-    vim.notify(err, vim.log.levels.ERROR)
-  end
-end, { desc = "Location List" })
-
--- quickfix list
+-- Quickfix List
 map("n", "<leader>xq", function()
   local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
   if not success and err then
@@ -110,7 +102,7 @@ map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 --   LazyVim.format({ force = true })
 -- end, { desc = "Format" })
 
--- diagnostic
+-- Diagnostic
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
@@ -133,10 +125,12 @@ Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
 Snacks.toggle.diagnostics():map("<leader>ud")
 Snacks.toggle.line_number():map("<leader>ul")
-Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
-Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
+Snacks.toggle.option("conceallevel",
+  { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
+Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
+    :map("<leader>uA")
 Snacks.toggle.treesitter():map("<leader>uT")
-Snacks.toggle.option("background", { off = "light", on = "dark" , name = "Dark Background" }):map("<leader>ub")
+Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
 Snacks.toggle.dim():map("<leader>uD")
 Snacks.toggle.animate():map("<leader>ua")
 Snacks.toggle.indent():map("<leader>ug")
@@ -150,7 +144,7 @@ end
 
 map("n", "<leader>gb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
 map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
-map({"n", "x" }, "<leader>gY", function()
+map({ "n", "x" }, "<leader>gY", function()
   Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
 end, { desc = "Git Browse (copy)" })
 
@@ -159,14 +153,16 @@ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-map("n", "<leader>uI", function() vim.treesitter.inspect_tree() vim.api.nvim_input("I") end, { desc = "Inspect Tree" })
+map("n", "<leader>uI", function()
+  vim.treesitter.inspect_tree()
+  vim.api.nvim_input("I")
+end, { desc = "Inspect Tree" })
 
 -- Floating Terminal
-map("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
+map("n", "<C-_>", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
 
 -- Terminal Mappings
-map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+map("t", "<C-_>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- Windows
 map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
@@ -184,12 +180,20 @@ map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
-
--- Snacks Remaps
+-- Snacks Remap
 map({ "n", "v" }, "<leader><space>", function() Snacks.picker.files() end, { desc = "Find Files" })
 map({ "n" }, "<leader>ff", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
 
 -- Keymaps picker
-map("n", "<leader>?", function ()
+map("n", "<leader>?", function()
   Snacks.picker.keymaps()
 end, { desc = "Keymaps Picker" })
+
+-- Run Lua Code, This should be lua specific
+map("n", "<leader>X", "<cmd>source %<cr>", { desc = "Source Current File" })
+map("n", "<leader>x", ":.lua<CR>", { desc = "Lua Run File" })
+map("v", "<leader>x", ":lua<CR>", { desc = "Lua Run Selected Lines" })
+
+-- Define a custom text object "g" for entire buffer
+vim.api.nvim_set_keymap("x", "ag", ":<C-u>normal! ggVG<CR>", {})
+vim.api.nvim_set_keymap("o", "ag", ":normal! ggVG<CR>", {})

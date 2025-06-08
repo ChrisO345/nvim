@@ -17,8 +17,11 @@ vim.opt.rtp:prepend(lazypath)
 require("autocmds")
 require("options")
 require("lazy").setup({
-  spec = "plugins",
-  install = { colorscheme = { "tokyonight" } },
+  spec = {
+    { import = "plugins" },
+    { import = "plugins.dev" }
+  },
+  install = { colorscheme = { "tokyonight", "habamax" } },
   change_detection = {
     notify = false,
   },

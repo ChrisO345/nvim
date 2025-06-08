@@ -28,7 +28,7 @@ return {
         enabled = true,
         layout = {
           cycle = true,
-          preset = "telescope",
+          preset = "default",
         }
       },
       quickfile = { enabled = true },

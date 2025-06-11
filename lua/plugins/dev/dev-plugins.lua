@@ -1,16 +1,27 @@
 local arch = {}
 
-local win = {}
+local win = {
+  {
+    dir = "D:/Plugins/schnapper.nvim",
+    opts = {
+      enabled = true
+    }
+  }
+}
 
 local wsl = {
   {
-    {
-      dir = "/mnt/d/Plugins/shroud.nvim",
-      opts = {
-        enabled = true,
-      }
+    dir = "/mnt/d/Plugins/shroud.nvim",
+    opts = {
+      enabled = true,
     }
   },
+  {
+    dir = "/mnt/d/Plugins/schnapper.nvim",
+    opts = {
+      enabled = true,
+    }
+  }
 }
 
 -- Configure based on which machine this is running on

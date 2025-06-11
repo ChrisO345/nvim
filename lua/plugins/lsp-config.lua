@@ -1,68 +1,39 @@
 return {
   {
-    "williamboman/mason.nvim",
-    lazy = false,
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    lazy = false,
-    opts = {
-      auto_install = true,
-    },
-  },
-  {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "folke/lazydev.nvim",
-      ft = "lua",
-      opts = {
-        library = {
-          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      { "mason-org/mason.nvim",           opts = {} },
+      { "mason-org/mason-lspconfig.nvim", opts = {} },
+      {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+          library = {
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          },
         },
-      },
+      }
     },
-    lazy = false,
     config = function()
-      local lspconfig = require("lspconfig")
-
-      -- TODO: Require from a custom lang folder all different language servers:
-      --  structure of folder would be langs/init.lua <- this gets required, and loads all available
-      --   language servers, and then langs/python.lua <- this is the configuration for the python language server
-
-      lspconfig.lua_ls.setup({
-      })
-
+      vim.diagnostic.config({ virtual_text = true })
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
-          local client = vim
-              .lsp
-              .get_client_by_id(
-                args.data
-                .client_id)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then return end
 
-          ---@diagnostic disable-next-line: missing-parameter
-          if client.supports_method("textDocument/formatting") then
-            vim.api
-                .nvim_create_autocmd(
-                  "BufWritePre",
-                  {
-                    buffer =
-                        args.buf,
-                    callback = function()
-                      vim.lsp
-                          .buf
-                          .format({
-                            bufnr =
-                                args.buf,
-                            id =
-                                client.id
-                          })
-                    end,
-                  })
+          -- Enable Formatting
+          if vim.lsp.client.supports_method(client, "textDocument/formatting") then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = args.buf,
+              callback = function()
+                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+              end,
+            })
+          end
+
+          -- Enable Inlay Hints
+          if vim.lsp.client.supports_method(client, "textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
           end
         end,
       })

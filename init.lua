@@ -17,7 +17,6 @@ require("options")
 require("lazy").setup({
   spec = {
     { import = "plugins" },
-    { import = "plugins.dev" }
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
   change_detection = {

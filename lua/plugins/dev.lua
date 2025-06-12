@@ -1,3 +1,4 @@
+-- Custom plugins are loaded in a per-os basis due to differing paths and availability
 local arch = {
   {
     dir = "~/personal/plugins/shroud.nvim/",

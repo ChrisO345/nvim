@@ -1,4 +1,11 @@
-local arch = {}
+local arch = {
+  {
+    dir = "~/personal/plugins/shroud.nvim/",
+    opts = {
+      enabled = true,
+    }
+  }
+}
 
 local win = {
   {
@@ -26,11 +33,10 @@ local wsl = {
 
 -- Configure based on which machine this is running on
 local plugs = {}
-if vim.fn.has("arch") == 1 then
-  print("Loading Arch plugins")
-  plugs = arch
-elseif vim.fn.has("wsl") == 1 then -- WSL has to be checked before Windows
+if vim.fn.has("wsl") == 1 then -- WSL has to be checked before others as it will match both
   plugs = wsl
+elseif vim.fn.has("linux") == 1 then
+  plugs = arch
 elseif vim.fn.has("windows") == 1 then
   plugs = win
 else

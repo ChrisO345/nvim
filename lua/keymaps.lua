@@ -164,7 +164,7 @@ end, { desc = "Inspect Tree" })
 map("n", "<C-_>", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
 
 -- Terminal Mappings
-map("t", "<C-_>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- Windows
 map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
@@ -191,11 +191,14 @@ map("n", "<leader>?", function()
   Snacks.picker.keymaps()
 end, { desc = "Keymaps Picker" })
 
+-- Open Messages
+map({ "n", "v" }, "<leader>m", "<cmd>messages<cr>", { desc = "Show Messages" })
+
 -- Run Lua Code, This should be lua specific
 map("n", "<leader>X", "<cmd>source %<cr>", { desc = "Source Current File" })
 map("n", "<leader>x", ":.lua<CR>", { desc = "Lua Run File" })
 map("v", "<leader>x", ":lua<CR>", { desc = "Lua Run Selected Lines" })
 
 -- Define a custom text object "g" for entire buffer
-vim.api.nvim_set_keymap("x", "ag", ":<C-u>normal! ggVG<CR>", {})
-vim.api.nvim_set_keymap("o", "ag", ":normal! ggVG<CR>", {})
+map("x", "ag", ":<C-u>normal! ggVG<CR>", {})
+map("o", "ag", ":normal! ggVG<CR>", {})

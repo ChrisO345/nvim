@@ -12,8 +12,17 @@ autocmd("TextYankPost", {
   end,
 })
 
--- Custom Filetypes
-vim.filetype.add({
-  pattern = {
-  },
-})
+-- Store a global variable for the OS type
+local os_types = {
+  "wsl", -- WSL has to be checked before others as it will match both
+  "linux",
+  "windows",
+}
+
+vim.g.os = "unknown" -- Default value if no OS matches
+for _, os in ipairs(os_types) do
+  if vim.fn.has(os) == 1 then
+    vim.g.os = os
+    break
+  end
+end

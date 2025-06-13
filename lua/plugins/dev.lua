@@ -34,14 +34,12 @@ local wsl = {
 
 -- Configure based on which machine this is running on
 local plugs = {}
-if vim.fn.has("wsl") == 1 then -- WSL has to be checked before others as it will match both
+if vim.g.os == "wsl" then
   plugs = wsl
-elseif vim.fn.has("linux") == 1 then
+elseif vim.g.os == "linux" then
   plugs = arch
-elseif vim.fn.has("windows") == 1 then
+elseif vim.g.os == "windows" then
   plugs = win
-else
-  print("Unknown OS, no plugins loaded")
 end
 
 return plugs

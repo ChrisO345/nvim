@@ -23,6 +23,10 @@ return {
       },
     },
     config = function(plugin)
+      if vim.g.os == "windows" then
+        require("plugins.lsp.settings")
+      end
+
       vim.diagnostic.config({ virtual_text = true })
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)

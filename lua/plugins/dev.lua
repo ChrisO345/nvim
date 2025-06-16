@@ -1,45 +1,35 @@
 -- Custom plugins are loaded in a per-os basis due to differing paths and availability
-local arch = {
+local plugins = {
   {
-    dir = "~/personal/plugins/shroud.nvim/",
-    opts = {
-      enabled = true,
-    }
-  }
-}
-
-local win = {
-  {
-    dir = "D:/Plugins/schnapper.nvim",
-    opts = {
-      enabled = true
-    }
-  }
-}
-
-local wsl = {
-  {
-    dir = "/mnt/d/Plugins/shroud.nvim",
+    dir = {
+      linux = "~/personal/plugins/shroud.nvim",
+      wsl = "/mnt/d/Plugins/shroud.nvim"
+    },
     opts = {
       enabled = true,
     }
   },
   {
-    dir = "/mnt/d/Plugins/schnapper.nvim",
+    dir = {
+      linux = "~/personal/plugins/schnapper.nvim",
+      wsl = "/mnt/d/Plugins/schnapper.nvim",
+      windows = "D:/Plugins/schnapper.nvim"
+    },
     opts = {
       enabled = true,
     }
   }
 }
 
--- Configure based on which machine this is running on
-local plugs = {}
-if vim.g.os == "wsl" then
-  plugs = wsl
-elseif vim.g.os == "linux" then
-  plugs = arch
-elseif vim.g.os == "windows" then
-  plugs = win
+local ret = {}
+for _, plugin in ipairs(plugins) do
+  local dir = plugin.dir[vim.g.os]
+  if dir then
+    table.insert(ret, {
+      dir = dir,
+      opts = plugin.opts
+    })
+  end
 end
 
-return plugs
+return ret

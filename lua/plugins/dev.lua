@@ -18,7 +18,7 @@ local plugins = {
     opts = {
       enabled = true,
     }
-  }
+  },
 }
 
 local ret = {}

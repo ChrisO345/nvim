@@ -71,7 +71,7 @@ map("i", ";", ";<c-g>u")
 -- Save File on Ctrl S
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
--- Keywordprg
+-- LSP Hover
 map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
 -- Easy Indenting
@@ -99,13 +99,9 @@ end, { desc = "Quickfix List" })
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
--- Formatting, FIXME: This needs a proper fix to allow formatting.
--- map({ "n", "v" }, "<leader>cf", function()
---   LazyVim.format({ force = true })
--- end, { desc = "Format" })
-
 -- Diagnostic
 local diagnostic_goto = function(next, severity)
+  ---@diagnostic disable-next-line: deprecated
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
@@ -144,16 +140,14 @@ if vim.lsp.inlay_hint then
   Snacks.toggle.inlay_hints():map("<leader>uh")
 end
 
+-- Git Mappings
 map("n", "<leader>gb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
 map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
-map({ "n", "x" }, "<leader>gY", function()
-  Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
-end, { desc = "Git Browse (copy)" })
 
 -- Quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
--- highlights under cursor
+-- Treesitter Inspect
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>uI", function()
   vim.treesitter.inspect_tree()
@@ -198,7 +192,7 @@ end, { desc = "Keymaps Picker" })
 -- Open Messages
 map({ "n", "v" }, "<leader>m", "<cmd>messages<cr>", { desc = "Show Messages" })
 
--- Run Lua Code, This should be lua specific
+-- Run Lua Code, TODO: This should be lua specific
 map("n", "<leader>X", "<cmd>source %<cr>", { desc = "Source Current File" })
 map("n", "<leader>x", ":.lua<CR>", { desc = "Lua Run File" })
 map("v", "<leader>x", ":lua<CR>", { desc = "Lua Run Selected Lines" })

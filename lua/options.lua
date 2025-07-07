@@ -1,5 +1,4 @@
 -- Editor settings
-
 vim.g.mapleader = " "
 vim.g.autoformat = true
 vim.g.snacks_animate = false
@@ -14,6 +13,7 @@ local opt = vim.opt
 
 opt.autowrite = true
 opt.clipboard = "unnamedplus"
+opt.colorcolumn = ""
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 0
 opt.confirm = true

@@ -16,8 +16,8 @@ return {
     },
     custom = {
       {
-        name = "lapdog",
-        cmd = { "/home/chris/personal/lapdog/lapdog" },
+        name = "labrat",
+        cmd = { "/home/chris/personal/labrat/labrat" },
         file_type = { "matlab" }, -- Octave/Matlab
         os = { "linux" }
       },

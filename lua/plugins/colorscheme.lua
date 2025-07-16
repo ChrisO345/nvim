@@ -9,12 +9,6 @@ return {
     end
   },
   {
-    "shaunsingh/nord.nvim",
-    lazy = false,
-    name = "nord",
-    priority = 10000,
-  },
-  {
     "rebelot/kanagawa.nvim",
     lazy = false,
     name = "kanagawa",
@@ -25,4 +19,17 @@ return {
       })
     end
   },
+  {
+    "/sainnhe/sonokai",
+    lazy = false,
+    name = "sonokai",
+    priority = 10000,
+    config = function()
+      vim.g.sonokai_enable_italic = true
+      vim.g.sonokai_transparent_background = true
+      vim.g.sonokai_style = "default"
+
+      -- vim.cmd.colorscheme("sonokai")
+    end
+  }
 }

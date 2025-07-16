@@ -10,6 +10,7 @@ return {
       },
       filetype = {
         dotenv = { glyph = "", hl = "MiniIconsYellow" },
+        jot = { glyph = "󱉩", hl = "@constructor" }, -- Custom icon for Jot files
       },
     },
     init = function()

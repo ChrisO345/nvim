@@ -1,14 +1,6 @@
 -- Custom plugins are loaded in a per-os basis due to differing paths and availability
+-- This file serves as a template only. Future changes made here are git-ignored.
 local plugins = {
-  {
-    dir = {
-      linux = "~/personal/plugins/shroud.nvim",
-      wsl = "/mnt/d/Plugins/shroud.nvim"
-    },
-    opts = {
-      enabled = true,
-    }
-  },
   {
     dir = {
       linux = "~/personal/plugins/schnapper.nvim",

@@ -12,14 +12,20 @@ return {
             { path = "${3rd}/luv/library", words = { "vim%.uv" } },
           },
         },
-      }
+      },
     },
     custom = {
       {
         name = "labrat",
         cmd = { "/home/chris/personal/labrat/labrat" },
         file_type = { "matlab" }, -- Octave/Matlab
-        os = { "linux" }
+        os = { "linux" },
+      },
+      {
+        name = "ocamllsp",
+        cmd = { "/home/chris/.opam/default/bin/ocamllsp" },
+        file_type = { "ocaml" }, -- OCaml
+        os = { "linux" },
       },
     },
     config = function(plugin)
@@ -31,7 +37,9 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if not client then return end
+          if not client then
+            return
+          end
 
           -- Enable Formatting
           if vim.lsp.client.supports_method(client, "textDocument/formatting") then
@@ -50,7 +58,11 @@ return {
         end,
       })
 
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+      vim.keymap.set("n", "K", function()
+        vim.lsp.buf.hover({
+          border = "rounded",
+        })
+      end)
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})

@@ -17,6 +17,6 @@ return {
         topdelete = { text = "" },
         changedelete = { text = "▎" },
       },
-    }
+    },
   },
 }

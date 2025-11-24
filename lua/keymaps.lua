@@ -116,16 +116,17 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
-
 -- Snacks Toggle Options. TODO: Change this at some point
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
 Snacks.toggle.diagnostics():map("<leader>ud")
 Snacks.toggle.line_number():map("<leader>ul")
-Snacks.toggle.option("conceallevel",
-  { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
-Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
+Snacks.toggle
+    .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" })
+    :map("<leader>uc")
+Snacks.toggle
+    .option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
     :map("<leader>uA")
 Snacks.toggle.treesitter():map("<leader>uT")
 Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
@@ -141,8 +142,12 @@ if vim.lsp.inlay_hint then
 end
 
 -- Git Mappings
-map("n", "<leader>gb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
-map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
+map("n", "<leader>gb", function()
+  Snacks.picker.git_log_line()
+end, { desc = "Git Blame Line" })
+map({ "n", "x" }, "<leader>gB", function()
+  Snacks.gitbrowse()
+end, { desc = "Git Browse (open)" })
 
 -- Quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
@@ -155,7 +160,9 @@ map("n", "<leader>uI", function()
 end, { desc = "Inspect Tree" })
 
 -- Floating Terminal
-map("n", "<C-_>", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
+map("n", "<C-_>", function()
+  Snacks.terminal()
+end, { desc = "Terminal (cwd)" })
 
 -- Terminal Mappings
 if vim.g.os == "linux" then
@@ -181,8 +188,12 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Snacks Remap
-map({ "n", "v" }, "<leader><space>", function() Snacks.picker.files({ hidden = true }) end, { desc = "Find Files" })
-map({ "n" }, "<leader>ff", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
+map({ "n", "v" }, "<leader><space>", function()
+  Snacks.picker.files({ hidden = true })
+end, { desc = "Find Files" })
+map({ "n" }, "<leader>ff", function()
+  Snacks.picker.smart()
+end, { desc = "Smart Find Files" })
 
 -- Keymaps picker
 map("n", "<leader>?", function()

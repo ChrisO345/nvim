@@ -7,9 +7,7 @@ local yankgroup = augroup("YankHighlight", {})
 autocmd("TextYankPost", {
   group = yankgroup,
   pattern = "*",
-  callback = function()
-    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
-  end,
+  callback = function() vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 }) end,
 })
 
 -- Store a global variable for the OS type

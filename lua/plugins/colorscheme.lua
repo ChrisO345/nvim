@@ -4,9 +4,7 @@ return {
     lazy = false,
     name = "tokyonight",
     priority = 10000,
-    config = function()
-      vim.cmd.colorscheme("tokyonight")
-    end,
+    config = function() vim.cmd.colorscheme("tokyonight") end,
   },
   {
     "rebelot/kanagawa.nvim",

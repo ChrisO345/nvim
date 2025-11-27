@@ -29,25 +29,19 @@ return {
       },
     },
     config = function(plugin)
-      if vim.g.os == "windows" then
-        require("plugins.lsp.settings")
-      end
+      if vim.g.os == "windows" then require("plugins.lsp.settings") end
 
       vim.diagnostic.config({ virtual_text = true })
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if not client then
-            return
-          end
+          if not client then return end
 
           -- Enable Formatting
           if vim.lsp.client.supports_method(client, "textDocument/formatting") then
             vim.api.nvim_create_autocmd("BufWritePre", {
               buffer = args.buf,
-              callback = function()
-                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-              end,
+              callback = function() vim.lsp.buf.format({ bufnr = args.buf, id = client.id }) end,
             })
           end
 

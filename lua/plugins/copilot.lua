@@ -21,9 +21,7 @@ return {
     -- Disable Copilot in .env files
     vim.api.nvim_create_autocmd("BufReadPre", {
       pattern = ".env*",
-      callback = function()
-        vim.b.copilot_enabled = false
-      end,
+      callback = function() vim.b.copilot_enabled = false end,
     })
   end,
 }

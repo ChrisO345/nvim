@@ -53,3 +53,9 @@ map("v", ">", ">gv")
 
 -- Save File on Ctrl S
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+
+-- Tmux Navigator Overrides
+map("n", "<C-h>", ":TmuxNavigateLeft<CR>", { desc = "Go to Left Window", remap = true })
+map("n", "<C-j>", ":TmuxNavigateDown<CR>", { desc = "Go to Lower Window", remap = true })
+map("n", "<C-k>", ":TmuxNavigateUp<CR>", { desc = "Go to Upper Window", remap = true })
+map("n", "<C-l>", ":TmuxNavigateRight<CR>", { desc = "Go to Right Window", remap = true })

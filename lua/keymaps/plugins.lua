@@ -77,3 +77,16 @@ end, { desc = "Inspect Tree" })
 
 -- Undotree
 map("n", "<leader>uu", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
+
+-- Sidekick
+map("n", "<tab>", function()
+  if not require("sidekick").nes_jump_or_apply() then return "<Tab>" end
+end, { expr = true, desc = "Goto/Apply Next Edit Suggestion" })
+map(
+  "n",
+  "<leader>aa",
+  function() require("sidekick.cli").toggle({ name = "copilot", focus = true }) end,
+  { desc = "Sidekick Toggle Copilot CLI" }
+)
+map("n", "<leader>ad", function() require("sidekick.cli").close() end, { desc = "Detach a CLI Session" })
+map({ "n", "x" }, "<leader>ap", function() require("sidekick.cli").prompt() end, { desc = "Sidekick Select Prompt" })

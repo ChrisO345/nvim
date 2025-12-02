@@ -22,11 +22,11 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
--- Snacks LSP Pickers
-map("n", "<leader>sd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
-map("n", "<leader>sD", function() Snacks.picker.lsp_declarations() end, { desc = "Goto Declaration" })
-map("n", "<leader>sr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" })
-map("n", "<leader>sI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
-map("n", "<leader>sy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
+-- Snacks - LSP
+map("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
+map("n", "gD", function() Snacks.picker.lsp_declarations() end, { desc = "Goto Declaration" })
+map("n", "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" })
+map("n", "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
+map("n", "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
 map("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
 map("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "LSP Workspace Symbols" })

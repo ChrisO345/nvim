@@ -19,7 +19,7 @@ return {
         },
         win = {
           input = { keys = { ["<ESC>"] = { "focus_preview", mode = { "i", "n" } } } },
-          preview = { keys = { ["<ESC>"] = { "close", mode = { "i", "n" } } } },
+          preview = { keys = { ["<ESC>"] = { "close", mode = { "i", "n", "v" } } } },
         },
       },
       quickfile = { enabled = true },
